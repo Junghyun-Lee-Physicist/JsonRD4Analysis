@@ -1,0 +1,8 @@
+@PACKAGE_INIT@
+# --> PACKAGE_INIT is the place holder to bring variables to set the package configuration file
+
+# JsonRD4Analysis configuration file
+
+# This file includes the target information for this library
+include("${CMAKE_CURRENT_LIST_DIR}/JsonRD4Analysis-targets.cmake")
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+# JsonRD4Analysis environment variables setting
+
+export JsonRD_LIB_ROOT="@CMAKE_INSTALL_PREFIX@"
+#export PATH="${JsonRD_LIB_ROOT}/bin:$PATH"
+export LD_LIBRARY_PATH="${JsonRD_LIB_ROOT}/lib:$LD_LIBRARY_PATH"
+export CPATH="${JsonRD_LIB_ROOT}/include:$CPATH"
+
+# JsonRD4Analysis package configuration file path (find_package() wlll use below)
+export JsonRD4Analysis_DIR="${JsonRD_LIB_ROOT}/share/JsonRD4Analysis/cmake"
+

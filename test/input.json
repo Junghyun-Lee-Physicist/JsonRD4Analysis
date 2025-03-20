@@ -1,0 +1,218 @@
+{
+  "FileDescription": "ttHH hadronic analysis configuration file",
+  "InputPath" : "/user/storage/",
+  "OutputPath" : "/user/output/",
+  "periods": {
+    "2016preAPV": {
+      "year": 2016,
+      "lumi": 19.7
+    },
+    "2016afterAPV": {
+      "year": 2016,
+      "lumi": 16.8
+    },
+    "2017": {
+      "year": 2017,
+      "lumi": 41.5
+    },
+    "2018": {
+      "year": 2018,
+      "lumi": 59.7
+    }
+  },
+  "samples": {
+    "ttHH": {
+      "Xs": 0.775,
+      "BR": 0.33918976,
+      "NEvt": 9934000,
+      "Weight": null,
+      "isData": false
+    },
+    "QCD_HT200to300": {
+      "Xs": 1552000000,
+      "BR": 1,
+      "NEvt": 60056309,
+      "Weight": null,
+      "isData": false
+    },
+    "QCD_HT300to500": {
+      "Xs": 321100000,
+      "BR": 1,
+      "NEvt": 54770756,
+      "Weight": null,
+      "isData": false
+    },
+    "QCD_HT500to700": {
+      "Xs": 30250000,
+      "BR": 1,
+      "NEvt": 60395873,
+      "Weight": null,
+      "isData": false
+    },
+    "QCD_HT700to1000": {
+      "Xs": 6398000,
+      "BR": 1,
+      "NEvt": 47501834,
+      "Weight": null,
+      "isData": false
+    },
+    "QCD_HT1000to1500": {
+      "Xs": 1122000,
+      "BR": 1,
+      "NEvt": 14164109,
+      "Weight": null,
+      "isData": false
+    },
+    "QCD_HT1500to2000": {
+      "Xs": 109400,
+      "BR": 1,
+      "NEvt": 12402197,
+      "Weight": null,
+      "isData": false
+    },
+    "QCD_HT2000toInf": {
+      "Xs": 21740,
+      "BR": 1,
+      "NEvt": 5614050,
+      "Weight": null,
+      "isData": false
+    },
+    "ttZHto4b": {
+      "Xs": 1.535,
+      "BR": 0.08736,
+      "NEvt": 9998000,
+      "Weight": null,
+      "isData": false
+    },
+    "ttZZto4b": {
+      "Xs": 1.98,
+      "BR": 0.0225,
+      "NEvt": 9832000,
+      "Weight": null,
+      "isData": false
+    },
+    "tt4b": {
+      "Xs": 297.79,
+      "BR": 1,
+      "NEvt": 9502000,
+      "Weight": null,
+      "isData": false
+    },
+    "ttHtobb": {
+      "Xs": 507.1,
+      "BR": 0.5824,
+      "NEvt": 7825000,
+      "Weight": null,
+      "isData": false
+    },
+    "ttZtobb": {
+      "Xs": 841.3,
+      "BR": 0.15,
+      "NEvt": 7074000,
+      "Weight": null,
+      "isData": false
+    },
+    "ttWW": {
+      "Xs": 6.992,
+      "BR": 1,
+      "NEvt": 698000,
+      "Weight": null,
+      "isData": false
+    },
+    "ttWH": {
+      "Xs": 1.143,
+      "BR": 1,
+      "NEvt": 360000,
+      "Weight": null,
+      "isData": false
+    },
+    "ttWZ": {
+      "Xs": 2.448,
+      "BR": 1,
+      "NEvt": 350000,
+      "Weight": null,
+      "isData": false
+    },
+    "tttW": {
+      "Xs": 0.7337,
+      "BR": 1,
+      "NEvt": 360000,
+      "Weight": null,
+      "isData": false
+    },
+    "tttt": {
+      "Xs": 8.091,
+      "BR": 1,
+      "NEvt": 10351000,
+      "Weight": null,
+      "isData": false
+    },
+    "ttTohadronic": {
+      "Xs": 833900,
+      "BR": 0.45441081,
+      "NEvt": 232999999,
+      "Weight": null,
+      "isData": false
+    },
+    "BTagCSV_B": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "BTagCSV_C": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "BTagCSV_D": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "BTagCSV_E": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "BTagCSV_F": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "JetHT_B": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "JetHT_C": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "JetHT_D": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "JetHT_E": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    },
+    "JetHT_F": {
+      "Xs": 1,
+      "BR": 1,
+      "Weight": null,
+      "isData": true
+    }
+  }
+}
