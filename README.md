@@ -8,9 +8,20 @@ The code is organized into two main class types: `JsonReader` and `interface`.
 After loading your configuration via `JsonReader` using the `nlohmann/json` parser, configuration values become instantly accessible throughout your code by including the corresponding `interface`.
 
 > [!NOTE]
-> - Uses `nlohmann/json` as the JSON parser: [nlohmann/json repository](https://github.com/nlohmann/json), which is licensed under the MIT License.
+> - Uses `nlohmann/json` as the JSON parser: [nlohmann/json repository](https://github.com/nlohmann/json)
 > - Implements a memory-efficient singleton pattern for the `interface` class
 > - Easily customizable through inheritance from the `JsonReader` class, allowing you to adapt the reader to your specific need
+
+----------
+----------
+
+## License
+This project is licensed under the Apache License 2.0.
+It also includes third-party components under different licenses:
+
+- `nlohmann/json` (MIT License) - [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
+
+See `LICENSE` and `NOTICE` files for details.
 
 ----------
 ----------
