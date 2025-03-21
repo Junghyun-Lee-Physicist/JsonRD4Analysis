@@ -1,4 +1,4 @@
-# JsonRD4Analysis
+<img width="921" alt="image" src="https://github.com/user-attachments/assets/f8f00fd4-6a63-4a5e-b90c-c5e5a74bcfc1" /># JsonRD4Analysis
 
 `JsonRD4Analysis` – Json ReaDer for Analysis
 
@@ -34,16 +34,19 @@ Installation can be done in two ways:
 > Regardless of the installation method you choose, the **install directory** must be specified with an absolute path.
 > If you prefer not to specify an installation directory, simply create an install directory in the base directory. The default installation path is set to that location.
 
-1. Installation using CMake
+Option1) Installation using CMake
   - Use the `-DCMAKE_INSTALL_PREFIX` option with an absolute path to specify your desired installation directory.
   - If you want to build a shared library, set the `-DBUILD_SHARED_LIBS` option to `ON`; if you prefer a static library, set it to `OFF`.
 ```typescript
 mkdir build && cd build
+
 cmake .. -DCMAKE_INSTALL_PREFIX="</path/to/installation>" -DBUILD_SHARED_LIBS=ON // In this case, a shared library will be built.
+// Please set </path/to/installation> to the absolute path of your desired installation location
+
 make && make install
 ```
 
-2. Installation using Makefile
+Option2) Installation using Makefile
   - Move to the `MakefileInstall` directory.
   - At the top of the `Makefile`, there is an `INSTALL_ROOT` variable. Assign the absolute path of your desired installation location to this variable.
   - To build a shared library, use `CompileShared.sh`; to build a static library, use `CompileStatic.sh`.
@@ -60,13 +63,14 @@ sh CompileShared.sh // In this case, a shared library will be built.
 ## Set the environment variables
 ```typescript
 source </path/to/installation>/share/JsonRD4Analysis/JsonRDsetup.sh
+// Please replace </path/to/installation> to the absolute path of installation location
 ```
 
 ----------
 ----------
 
 ## How to implement to your source code?
-  - In the test directory, example `CMakeLists` are provided demonstrating how to configure your project for both CMake-based and Makefile-based builds.
+  - In the `test` directory, example `CMakeLists` are provided demonstrating how to configure your project for both CMake-based and Makefile-based builds.
   - By reviewing the example code in `test_json.cpp`, you can easily understand how to integrate this program into your own project.
 ```typescript
 // How to build example code
