@@ -11,8 +11,9 @@ After loading your configuration via `JsonReader` using the `nlohmann/json` pars
 > - Implements a memory-efficient singleton pattern for the `interface` class
 > - Easily customizable through inheritance from the `JsonReader` class, allowing you to adapt the reader to your specific need
 
+
 ----------
-----------
+
 
 ## License
 This project is licensed under the Apache License 2.0.
@@ -22,8 +23,9 @@ It also includes third-party components under different licenses:
 
 See `LICENSE` and `NOTICE` files for details.
 
+
 ----------
-----------
+
 
 ## Installation
 Installation can be done in two ways:
@@ -56,8 +58,9 @@ cd MakefileInstall
 sh CompileShared.sh // In this case, a shared library will be built.
 ```
 
+
 ----------
-----------
+
 
 ## Set the environment variables
 ```typescript
@@ -65,8 +68,9 @@ source </path/to/installation>/share/JsonRD4Analysis/JsonRDsetup.sh
 // Please replace </path/to/installation> to the absolute path of installation location
 ```
 
+
 ----------
-----------
+
 
 ## How to implement to your source code?
   - In the `test` directory, example `CMakeLists` are provided demonstrating how to configure your project for both CMake-based and Makefile-based builds.
