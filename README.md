@@ -35,7 +35,7 @@ Installation can be done in two ways:
 > Regardless of the installation method you choose, the **install directory** must be specified with an absolute path.
 > If you prefer not to specify an installation directory, simply create an install directory in the base directory. The default installation path is set to that location.
 
-Option1) Installation using CMake
+Option 1) Installation using CMake
   - Use the `-DCMAKE_INSTALL_PREFIX` option with an absolute path to specify your desired installation directory.
   - If you want to build a shared library, set the `-DBUILD_SHARED_LIBS` option to `ON`; if you prefer a static library, set it to `OFF`.
 ```typescript
@@ -49,14 +49,13 @@ cmake .. -DCMAKE_INSTALL_PREFIX="</path/to/installation>" -DBUILD_SHARED_LIBS=ON
 make && make install
 ```
 
-Option2) Installation using Makefile
+Option 2) Installation using Makefile
   - Move to the `MakefileInstall` directory.
   - At the top of the `Makefile`, there is an `INSTALL_ROOT` variable. Assign the absolute path of your desired installation location to this variable.
   - To build a shared library, use `CompileShared.sh`; to build a static library, use `CompileStatic.sh`.
 ```typescript
 git clone https://github.com/Junghyun-Lee-Physicist/JsonRD4Analysis.git
-cd JsonRD4Analysis
-cd MakefileInstall
+cd JsonRD4Analysis/MakefileInstall
 // Modify the INSTALL_ROOT variable in the Makefile to the absolute path of your installation directory.
 
 sh CompileShared.sh // In this case, a shared library will be built.
