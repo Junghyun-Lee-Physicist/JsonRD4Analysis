@@ -1,5 +1,4 @@
-<img width="921" alt="image" src="https://github.com/user-attachments/assets/f8f00fd4-6a63-4a5e-b90c-c5e5a74bcfc1" /># JsonRD4Analysis
-
+# JsonRD4Analysis
 `JsonRD4Analysis` – Json ReaDer for Analysis
 
 JsonRD4Analysis provides a simple and intuitive way to read JSON configurations into C++ projects.
