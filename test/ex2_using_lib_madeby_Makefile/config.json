@@ -1,18 +1,10 @@
 {
   "Author" : "Jh. Lee",
-  "FileDescription": "ttHH hadronic analysis configuration file",
+  "FileDescription": "Example json for JsonRD4Analysis",
   "InputPath" : "/user//storage/",
   "OutputPath" : "/user//output/////",
   "noiseFilters" : [ "goodVertices", "globalSuperTightHalo2016Filter" ,"HBHENoiseFilter" ],
   "periods": {
-    "2016preAPV": {
-      "year": 2016,
-      "lumi": 19.7
-    },
-    "2016afterAPV": {
-      "year": 2016,
-      "lumi": 16.8
-    },
     "2017": {
       "year": 2017,
       "lumi": 41.5
@@ -23,13 +15,6 @@
     }
   },
   "samples": {
-    "ttHH": {
-      "Xs": 0.775,
-      "BR": 0.33918976,
-      "NEvt": 9934000,
-      "Weight": null,
-      "isData": false
-    },
     "ttTohadronic": {
       "Xs": 833900,
       "BR": 0.45441081,
@@ -37,13 +22,7 @@
       "Weight": null,
       "isData": false
     },
-    "JetHT_B": {
-      "Xs": 1,
-      "BR": 1,
-      "Weight": null,
-      "isData": true
-    },
-    "JetHT_C": {
+    "JetHT": {
       "Xs": 1,
       "BR": 1,
       "Weight": null,
