@@ -3,6 +3,7 @@
 // This project uses nlohmann/json (https://github.com/nlohmann/json)
 // Licensed under the MIT License.
 
+// Standard library
 #include <fstream>
 #include <iostream>
 
@@ -79,41 +80,5 @@ bool JsonConfigReader::fillConfig() {
         std::cerr << "Error filling cfgInterFaceuration: " << ex.what() << "\n";
         return false;
     }
-    return true;
-}
-
-bool JsonConfigReader::save(const std::string& filePath) {
-    auto& cfgInterFace = ConfigInterface::getInstance();
-    json j;
-    j["FileDescription"] = cfgInterFace.FileDescription;
-    j["InputPath"] = cfgInterFace.InputPath;
-    j["OutputPath"] = cfgInterFace.OutputPath;
-    
-    json jPeriods;
-    for (const auto& p : cfgInterFace.periods) {
-        jPeriods[p.first] = { {"year", p.second.year}, {"lumi", p.second.lumi} };
-    }
-    j["periods"] = jPeriods;
-    
-    json jSamples;
-    for (const auto& s : cfgInterFace.samples) {
-        jSamples[s.first] = {
-            {"Xs", s.second.Xs},
-            {"BR", s.second.BR},
-            {"NEvt", s.second.NEvt},
-            {"Weight", s.second.Weight},
-            {"isData", s.second.isData}
-        };
-    }
-    j["samples"] = jSamples;
-    
-    j["noiseFilters"] = cfgInterFace.noiseFilters;
-    
-    std::ofstream ofs(filePath);
-    if (!ofs) {
-        std::cerr << "Error opening file for writing: " << filePath << "\n";
-        return false;
-    }
-    ofs << j.dump(4);
     return true;
 }

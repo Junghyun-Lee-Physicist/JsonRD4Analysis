@@ -28,37 +28,22 @@ See `LICENSE` and `NOTICE` files for details.
 
 
 ## Installation
-Installation can be done in two ways:
-    - Using CMake
-    - Using Makefile
+The library is built and installed using a simple Makefile.
+
 > [!Important]
-> Regardless of the installation method you choose, the **install directory** must be specified with an absolute path.
-> If you prefer not to specify an installation directory, simply create an install directory in the base directory. The default installation path is set to that location.
+> The **install directory** must be specified with an absolute path.
+> If you prefer not to specify an installation directory, simply create an `install` directory in the base directory. The default installation path is set to that location.
 
-Option 1) Installation using CMake
-  - Use the `-DCMAKE_INSTALL_PREFIX` option with an absolute path to specify your desired installation directory.
-  - If you want to build a shared library, set the `-DBUILD_SHARED_LIBS` option to `ON`; if you prefer a static library, set it to `OFF`.
-```typescript
-git clone https://github.com/Junghyun-Lee-Physicist/JsonRD4Analysis.git
-cd JsonRD4Analysis
-mkdir build && cd build
-
-cmake .. -DCMAKE_INSTALL_PREFIX="</path/to/installation>" -DBUILD_SHARED_LIBS=ON // In this case, a shared library will be built.
-// Please set </path/to/installation> to the absolute path of your desired installation location
-
-make && make install
-```
-
-Option 2) Installation using Makefile
+Steps:
   - Move to the `MakefileInstall` directory.
-  - At the top of the `Makefile`, there is an `INSTALL_ROOT` variable. Assign the absolute path of your desired installation location to this variable.
+  - At the top of the `Makefile`, set the `INSTALL_ROOT` variable to the absolute path of your desired installation location.
   - To build a shared library, use `CompileShared.sh`; to build a static library, use `CompileStatic.sh`.
 ```typescript
 git clone https://github.com/Junghyun-Lee-Physicist/JsonRD4Analysis.git
 cd JsonRD4Analysis/MakefileInstall
-// Modify the INSTALL_ROOT variable in the Makefile to the absolute path of your installation directory.
+# Modify the INSTALL_ROOT variable in the Makefile to the absolute path of your installation directory.
 
-sh CompileShared.sh // In this case, a shared library will be built.
+sh CompileShared.sh   // Builds and installs a shared library
 ```
 
 
@@ -76,13 +61,14 @@ source </path/to/installation>/share/JsonRD4Analysis/JsonRDsetup.sh
 
 
 ## How to implement to your source code?
-  - In the `test` directory, example `CMakeLists` are provided demonstrating how to configure your project for both CMake-based and Makefile-based builds.
-  - By reviewing the example code in `test_json.cpp`, you can easily understand how to integrate this program into your own project.
+  - The `test` directory now contains Makefile-based examples demonstrating how to link against the library.
+  - Review the example code in `test_json.cpp` within each example to understand how to integrate this program into your own project.
 ```typescript
-// How to build example code
-// In the example directory,
-mkdir build && cd build
-cmake ..
-make
-./test_json
+// Build example code using the library built in MakefileInstall
+cd test/example_local
+make run
+
+// Build example code using the library installed to ../../install
+cd ../example_install
+make run
 ```

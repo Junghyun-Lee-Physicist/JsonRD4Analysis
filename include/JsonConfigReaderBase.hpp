@@ -8,15 +8,14 @@
 
 using json = nlohmann::json;
 
-// JsonConfigReaderBase is an abstract base class for reading and saving JSON configuration files.
-// All functions open(), save(), and fillConfig() are pure virtual and must be implemented by derived classes.
+// JsonConfigReaderBase is an abstract base class for reading JSON configuration files.
+// All functions open() and fillConfig() are pure virtual and must be implemented by derived classes.
 class JsonConfigReaderBase {
 public:
     virtual ~JsonConfigReaderBase() = default;
     
     // Pure virtual functions: must be implemented in derived classes.
     virtual bool open(const std::string& filePath) = 0;
-    virtual bool save(const std::string& filePath) = 0;
     virtual bool fillConfig() = 0;
     
 protected:

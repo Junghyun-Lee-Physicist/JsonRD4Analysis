@@ -3,7 +3,7 @@
 
 #include "JsonConfigReaderBase.hpp"
 
-// JsonConfigReader is a derived class that implements open(), save(), and fillConfig()
+// JsonConfigReader is a derived class that implements open() and fillConfig()
 // for a specific JSON format.
 class JsonConfigReader : public JsonConfigReaderBase {
 public:
@@ -15,7 +15,6 @@ public:
     
     // Override the pure virtual functions.
     virtual bool open(const std::string& filePath) override;
-    virtual bool save(const std::string& filePath) override;
     virtual bool fillConfig() override;
     
 private:
