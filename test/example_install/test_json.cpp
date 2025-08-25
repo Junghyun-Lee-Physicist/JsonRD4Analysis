@@ -4,7 +4,7 @@
 #include "ConfigInterface.hpp"
 
 int main() {
-    const std::string configName = "config.json"; 
+    const std::string configName = "config.json";
 
     // Read the JSON configuration file to fill the configuration data
     if (!JsonConfigReader::getInstance().open(configName)) {
@@ -22,18 +22,18 @@ int main() {
 
     std::cout << "\nPeriods:\n";
     for (const auto& entry : cfgInterFace.periods) {
-        std::cout << "Period: " << entry.first 
-                  << ", Year: " << entry.second.year 
+        std::cout << "Period: " << entry.first
+                  << ", Year: " << entry.second.year
                   << ", Lumi: " << entry.second.lumi << std::endl;
     }
 
     std::cout << "\nSamples:\n";
     for (const auto& entry : cfgInterFace.samples) {
-        std::cout << "Sample: " << entry.first 
-                  << ", Xs: " << entry.second.Xs 
-                  << ", BR: " << entry.second.BR 
-                  << ", NEvt: " << entry.second.NEvt 
-                  << ", Weight: " << entry.second.Weight 
+        std::cout << "Sample: " << entry.first
+                  << ", Xs: " << entry.second.Xs
+                  << ", BR: " << entry.second.BR
+                  << ", NEvt: " << entry.second.NEvt
+                  << ", Weight: " << entry.second.Weight
                   << ", isData: " << (entry.second.isData ? "true" : "false") << std::endl;
     }
 
@@ -43,12 +43,5 @@ int main() {
     }
     std::cout << std::endl;
 
-    // Save the configuration information to a new JSON file (e.g., output.json)
-    if (!JsonConfigReader::getInstance().save("output.json")) {
-        std::cerr << "Failed to save output.json file." << std::endl;
-        return 1;
-    }
-
-    std::cout << "\nConfiguration successfully saved to output.json" << std::endl;
     return 0;
 }
