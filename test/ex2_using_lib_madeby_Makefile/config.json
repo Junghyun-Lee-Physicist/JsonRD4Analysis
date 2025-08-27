@@ -3,30 +3,35 @@
   "FileDescription": "Example json for JsonRD4Analysis",
   "InputPath" : "/user//storage/",
   "OutputPath" : "/user//output/////",
-  "noiseFilters" : [ "goodVertices", "globalSuperTightHalo2016Filter" ,"HBHENoiseFilter" ],
-  "periods": {
-    "2017": {
-      "year": 2017,
-      "lumi": 41.5
-    },
-    "2018": {
-      "year": 2018,
-      "lumi": 59.7
+  "2016noiseFilter" : ["goodVertices", "globalSuperTightHalo2016Filter", "HBHENoiseFilter"],
+  "2017noiseFilter" : ["goodVertices", "HBHENoiseFilter"],
+  "2018noiseFilter" : ["goodVertices", "HBHENoiseFilter"],
+  "2016PreAPV" : {
+    "lumi" : 19.5,
+    "samples" : {
+      "ttTohadronic" : {"Xs":833900, "BR":0.45441081, "NEvt":232999999, "Wgt":1.0, "Type":"MC"},
+      "JetHT" : {"Xs":1, "BR":1, "NEvt":1000000, "Wgt":1.0, "Type":"Data"}
     }
   },
-  "samples": {
-    "ttTohadronic": {
-      "Xs": 833900,
-      "BR": 0.45441081,
-      "NEvt": 232999999,
-      "Weight": null,
-      "isData": false
-    },
-    "JetHT": {
-      "Xs": 1,
-      "BR": 1,
-      "Weight": null,
-      "isData": true
+  "2016PostAPV" : {
+    "lumi" : 16.8,
+    "samples" : {
+      "ttTohadronic" : {"Xs":833900, "BR":0.45441081, "NEvt":232999999, "Wgt":1.0, "Type":"MC"},
+      "JetHT" : {"Xs":1, "BR":1, "NEvt":1000000, "Wgt":1.0, "Type":"Data"}
+    }
+  },
+  "2017" : {
+    "lumi" : 41.5,
+    "samples" : {
+      "ttTohadronic" : {"Xs":833900, "BR":0.45441081, "NEvt":232999999, "Wgt":1.0, "Type":"MC"},
+      "JetHT" : {"Xs":1, "BR":1, "NEvt":1000000, "Wgt":1.0, "Type":"Data"}
+    }
+  },
+  "2018" : {
+    "lumi" : 59.7,
+    "samples" : {
+      "ttTohadronic" : {"Xs":833900, "BR":0.45441081, "NEvt":232999999, "Wgt":1.0, "Type":"MC"},
+      "JetHT" : {"Xs":1, "BR":1, "NEvt":1000000, "Wgt":1.0, "Type":"Data"}
     }
   }
 }
