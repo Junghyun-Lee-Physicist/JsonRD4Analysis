@@ -1,19 +1,19 @@
 # JsonRD4Analysis
 `JsonRD4Analysis` – Json ReaDer for Analysis
 
-JsonRD4Analysis provides a simple and intuitive way to read JSON configurations into C++ projects.
+JsonRD4Analysis provides a simple and intuitive way to read JSON configurations into C++ projects and expose the values through lightweight singleton interfaces.
 
-The code is organized into two main class types: `JsonReader` and `interface`.
-After loading your configuration via `JsonReader` using the `nlohmann/json` parser, configuration values become instantly accessible throughout your code by including the corresponding `interface`.
+The library consists of two core components:
+
+- **JsonConfigReader** – loads JSON files and fills configuration structures.
+- **Config interfaces** – header-only singletons that store configuration values and can be included anywhere.
 
 > [!NOTE]
 > - Uses `nlohmann/json` as the JSON parser: [nlohmann/json repository](https://github.com/nlohmann/json)
-> - Implements a memory-efficient singleton pattern for the `interface` class
-> - Easily customizable through inheritance from the `JsonReader` class, allowing you to adapt the reader to your specific need
+> - Interfaces are implemented as memory–efficient singletons
+> - Users may create multiple interface headers to match different JSON layouts
 
-
-----------
-
+---
 
 ## License
 This project is licensed under the Apache License 2.0.
@@ -23,66 +23,163 @@ It also includes third-party components under different licenses:
 
 See `LICENSE` and `NOTICE` files for details.
 
-
-----------
-
+---
 
 ## Installation
-Installation can be done in two ways:
-    - Using CMake
-    - Using Makefile
-> [!Important]
-> Regardless of the installation method you choose, the **install directory** must be specified with an absolute path.
-> If you prefer not to specify an installation directory, simply create an install directory in the base directory. The default installation path is set to that location.
+All build scripts live in the `installer` directory.  The final installation
+prefix defaults to the `install` directory in the project root but can be
+changed.
 
-Option 1) Installation using CMake
-  - Use the `-DCMAKE_INSTALL_PREFIX` option with an absolute path to specify your desired installation directory.
-  - If you want to build a shared library, set the `-DBUILD_SHARED_LIBS` option to `ON`; if you prefer a static library, set it to `OFF`.
-```typescript
-git clone https://github.com/Junghyun-Lee-Physicist/JsonRD4Analysis.git
-cd JsonRD4Analysis
-mkdir build && cd build
-
-cmake .. -DCMAKE_INSTALL_PREFIX="</path/to/installation>" -DBUILD_SHARED_LIBS=ON // In this case, a shared library will be built.
-// Please set </path/to/installation> to the absolute path of your desired installation location
-
-make && make install
+### Option 1 – CMake
+```bash
+cd installer
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=../install -DBUILD_SHARED_LIBS=ON
+cmake --build build
+cmake --install build
+rm -rf build            # remove intermediates
 ```
 
-Option 2) Installation using Makefile
-  - Move to the `MakefileInstall` directory.
-  - At the top of the `Makefile`, there is an `INSTALL_ROOT` variable. Assign the absolute path of your desired installation location to this variable.
-  - To build a shared library, use `CompileShared.sh`; to build a static library, use `CompileStatic.sh`.
-```typescript
-git clone https://github.com/Junghyun-Lee-Physicist/JsonRD4Analysis.git
-cd JsonRD4Analysis/MakefileInstall
-// Modify the INSTALL_ROOT variable in the Makefile to the absolute path of your installation directory.
-
-sh CompileShared.sh // In this case, a shared library will be built.
+### Option 2 – Makefile
+```bash
+cd installer
+make shared             # or: make static
+# artifacts are placed in ../install and build/ is removed
 ```
 
-
-----------
-
-
-## Set the environment variables
-```typescript
-source </path/to/installation>/share/JsonRD4Analysis/JsonRDsetup.sh
-// Please replace </path/to/installation> to the absolute path of installation location
+Clean everything at any time:
+```bash
+cd installer
+make clean              # removes ../install and build/
 ```
 
-
-----------
-
-
-## How to implement to your source code?
-  - In the `test` directory, example `CMakeLists` are provided demonstrating how to configure your project for both CMake-based and Makefile-based builds.
-  - By reviewing the example code in `test_json.cpp`, you can easily understand how to integrate this program into your own project.
-```typescript
-// How to build example code
-// In the example directory,
-mkdir build && cd build
-cmake ..
-make
-./test_json
+After installation set up the environment (defaults to `./install` when no path
+is given):
+```bash
+source JsonRDsetup.sh [path/to/install]
 ```
+
+---
+
+## JSON reader
+`JsonConfigReader` reads a configuration file and populates the default
+interface `CMSAnalysisConfig` (reachable via the convenience alias
+`ConfigInterface`).
+
+Missing mandatory fields cause an error.  Optional fields that are present but
+`null` trigger warnings.
+
+To inspect the loaded configuration you can call:
+```cpp
+JsonConfigReader::getInstance().printJsonConfig();
+```
+which prints the full JSON structure.
+
+---
+
+## Interfaces
+Interfaces live in `include/interfaces`.  The default interface is
+`CMSAnalysisConfig.hpp` in namespace `CMSConfig`, which can be accessed through
+the umbrella header `ConfigInterface.hpp`:
+```cpp
+#include "JsonConfigReader.hpp"
+#include "ConfigInterface.hpp"   // pulls in interfaces/CMSAnalysisConfig.hpp
+
+int main() {
+    auto& reader = JsonConfigReader::getInstance();
+    reader.open("config.json");
+    auto& cfg = ConfigInterface::getInstance();
+    std::cout << "Input path: " << cfg.InputPath << '\n';
+    std::cout << "2017 noise filters:" << '\n';
+    for (const auto& nf : cfg.noiseFilters["2017noiseFilter"]) {
+        std::cout << "  - " << nf << '\n';
+    }
+    std::cout << "ttTohadronic Xs (2018): "
+              << cfg.years.at("2018").samples.at("ttTohadronic").Xs
+              << std::endl;
+}
+```
+
+To create a configuration for a different analysis:
+1. Copy `include/interfaces/CMSAnalysisConfig.hpp` to a new header (e.g.
+   `DualReadoutConfig.hpp`).
+2. Adjust the structs/namespaces to match your JSON layout.
+3. Include your new header directly in applications or update
+   `include/ConfigInterface.hpp` to alias it instead of `CMSAnalysisConfig.hpp`.
+
+---
+
+## Examples
+The `test` directory demonstrates several build/use combinations:
+
+1. `ex1_using_find_package` – library built and used with CMake (`find_package`).
+2. `ex2_using_lib_madeby_Makefile` – library built with Makefile and consumed with CMake.
+3. `ex3_using_make_only` – library and application both built with Makefile.
+
+Each example contains a `config.json` and minimal code showing how arrays, maps and plain variables are accessed.
+
+---
+
+## JSON structure
+A typical configuration might look like:
+```json
+{
+  "FileDescription": "Example json for JsonRD4Analysis",
+  "InputPath" : "/user/storage/",
+  "OutputPath" : "/user/output/",
+  "2016noiseFilter" : ["goodVertices", "HBHENoiseFilter"],
+  "2017noiseFilter" : ["goodVertices"],
+  "2018noiseFilter" : ["goodVertices"],
+  "2018" : {
+    "lumi" : 59.7,
+    "samples" : {
+      "ttTohadronic" : {"Xs":833900, "BR":0.454, "NEvt":232999999, "Wgt":1.0, "Type":"MC"}
+    }
+  }
+}
+```
+Each year (e.g., `2016PreAPV`, `2016PostAPV`, `2017`, `2018`) contains its own
+`lumi` and `samples` map.  Noise filters are provided per year via dedicated
+arrays.
+
+---
+
+## Using the installed library
+After running the installer and sourcing `JsonRDsetup.sh`, your environment will
+contain `JsonRD_LIB_ROOT`, `CPATH`, and `LIBRARY_PATH` variables pointing to the
+installed headers and libraries.
+
+### CMake projects
+Add the package and link target in your `CMakeLists.txt`:
+```cmake
+find_package(JsonRD4Analysis REQUIRED)
+add_executable(myapp main.cpp)
+target_link_libraries(myapp PRIVATE JsonRD4Analysis::JsonRD4Analysis)
+```
+`main.cpp` can then include the headers and use the interface:
+```cpp
+#include "JsonConfigReader.hpp"
+#include "ConfigInterface.hpp"
+
+int main() {
+    auto& reader = JsonConfigReader::getInstance();
+    reader.open("config.json");
+    auto& cfg = ConfigInterface::getInstance();
+    std::cout << cfg.InputPath << std::endl;
+}
+```
+
+### Makefile projects
+Source `JsonRDsetup.sh` and use the exported variables:
+```make
+CXX      ?= g++
+CXXFLAGS += -I$(JsonRD_LIB_ROOT)/include
+LDFLAGS  += -L$(JsonRD_LIB_ROOT)/lib -lJsonRD4Analysis
+
+all: app
+
+app: main.cpp
+    $(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
+```
+The accompanying `main.cpp` is identical to the one shown above.
+
+---

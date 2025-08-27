@@ -10,6 +10,12 @@ if(NOT DEFINED CMAKE_INSTALL_PREFIX OR CMAKE_INSTALL_PREFIX STREQUAL "/usr/local
   set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install" CACHE PATH "Installation Directory" FORCE)
 endif()
 
+# Ensure installation directories exist even on a fresh tree.
+file(MAKE_DIRECTORY
+     "${CMAKE_INSTALL_PREFIX}"
+     "${CMAKE_INSTALL_PREFIX}/lib"
+     "${CMAKE_INSTALL_PREFIX}/include")
+
 # Option: Build as a shared library (ON) or static library (OFF)
 option(BUILD_SHARED_LIBS "Build as a shared library (OFF for static)" ON)
 
@@ -76,22 +82,6 @@ configure_package_config_file(
 # Install the generated package configuration file to the proper directory.
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/JsonRD4AnalysisConfig.cmake"
     DESTINATION share/JsonRD4Analysis/cmake
-)
-
-
-# Generate and install the environment setup script.
-# The setup script is used to configure environment variables (e.g., JSONLIB_ROOT, CPATH, LD_LIBRARY_PATH) for users.
-# We use configure_file() with the @ONLY option so that only @VAR@ placeholders are replaced,
-# while ${...} shell variable syntax is preserved for runtime expansion.
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/JsonRDsetup.sh.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/JsonRDsetup.sh" 
-	       @ONLY
-)
-
-
-# Install the generated setup script to the package's share directory.
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/JsonRDsetup.sh"
-        DESTINATION share/JsonRD4Analysis
 )
 
 
